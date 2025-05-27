@@ -1,1 +1,157 @@
-<p>task-list works!</p>
+<div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+    <!-- Header Section -->
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-8 space-y-4 lg:space-y-0">
+      <div class="flex items-center space-x-3">
+        <div>
+          <h2 class="text-2xl font-semibold text-gray-800">Task Management</h2>
+          <p class="text-gray-600 text-sm mt-1.5">Manage and track your tasks efficiently</p>
+        </div>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">        
+        <!-- Status Filter -->
+        <div class="flex items-center space-x-2">
+          <label for="statusFilter" class="text-sm font-medium text-gray-700 whitespace-nowrap">Status:</label>
+          <p-dropdown
+            id="statusFilter"
+            [options]="statusOptions"
+            [(ngModel)]="selectedStatus"
+            (onChange)="onStatusFilterChange()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="All"
+            styleClass="w-40"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+
+    @if (tasks) {
+        <!-- Stats Cards -->
+        <app-stat-card [tasks]="tasks"></app-stat-card>
+    }
+
+    <!-- Tasks Table -->
+    <div class="bg-white rounded-lg border border-gray-200">
+      <p-table
+        [value]="filteredTasks"
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
+        [rowsPerPageOptions]="[5, 10, 20, 50]"
+        styleClass="p-datatable-sm"
+        responsiveLayout="scroll"
+        [globalFilterFields]="['title', 'description']"
+      >
+        <ng-template pTemplate="header">
+          <tr class="bg-gray-50">
+            <th class="text-left py-4 px-6 font-semibold text-gray-700">
+              <span>Title</span>
+            </th>
+            <th class="text-left py-4 px-6 font-semibold text-gray-700">Description</th>
+            <th class="text-center py-4 px-6 font-semibold text-gray-700">
+              <span>Status</span>
+            </th>
+            <th class="text-center py-4 px-6 font-semibold text-gray-700">
+              <span>Created</span>
+            </th>
+            <th class="text-center py-4 px-6 font-semibold text-gray-700">Actions</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-task let-index="rowIndex">
+          <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200">
+            <td class="py-4 px-6">
+              <div class="flex items-center">
+                <div class="w-2 h-8 rounded-full mr-3" [ngClass]="{
+                  'bg-blue-400': task.status === taskStatus.OPEN,
+                  'bg-orange-400': task.status === taskStatus.IN_PROGRESS,
+                  'bg-green-400': task.status === taskStatus.DONE
+                }"></div>
+                <div>
+                  <p class="font-semibold text-gray-900 text-base">{{ task.title }}</p>
+                </div>
+              </div>
+            </td>
+            
+            <td class="py-4 px-6">
+              <div class="max-w-xs">
+                <span *ngIf="task.description; else noDescription" class="text-gray-700 text-sm leading-relaxed">
+                  {{ task.description.length > 100 ? (task.description | slice:0:100) + '...' : task.description }}
+                </span>
+                <ng-template #noDescription>
+                  <em class="text-gray-400 text-sm">No description provided</em>
+                </ng-template>
+              </div>
+            </td>
+            
+            <td class="py-4 px-6 text-center">
+              <p-dropdown
+                [options]="taskStatusOptions"
+                [ngModel]="task.status"
+                (onChange)="updateTaskStatus(task, $event.value)"
+                optionLabel="label"
+                optionValue="value"
+                styleClass="w-full max-w-[140px]"
+                [showClear]="false"
+              ></p-dropdown>
+            </td>
+            
+            <td class="py-4 px-6 text-center">
+              <div class="flex flex-col items-center space-y-1">
+                <span class="text-sm font-medium text-gray-700">{{ task.createdAt | date }}</span>
+              </div>
+            </td>
+            
+            <td class="py-4 px-6 text-center">
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-outlined p-button-danger p-button-sm"
+                  (onClick)="confirmDelete(task)"
+                ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5" class="text-center py-12">
+              <div class="flex flex-col items-center space-y-4 py-10">
+                <div class="bg-gray-100 p-6 rounded-full">
+                  <i class="pi pi-inbox text-4xl text-gray-400"></i>
+                </div>
+                <div class="space-y-2">
+                  <p class="text-xl font-medium text-gray-700 text-center">No tasks found</p>
+                  <p class="text-sm text-gray-500 max-w-md text-center">
+                    {{ selectedStatus === 'ALL' && !searchText ? 
+                        'Create your first task to get started with task management' : 
+                        'Try adjusting your filters or search terms to find what you\'re looking for' 
+                    }}
+                  </p>
+                </div>
+                <button 
+                  *ngIf="selectedStatus !== 'ALL' || searchText"
+                  class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                  (click)="clearFilters()"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+</div>
+
+<!-- Confirmation Dialog -->
+<p-confirmDialog 
+    [style]="{width: '400px'}"
+    [baseZIndex]="10000"
+    rejectButtonStyleClass="p-button-text p-button-secondary"
+    acceptButtonStyleClass="p-button-danger"
+    acceptLabel="Delete"
+    rejectLabel="Cancel"
+></p-confirmDialog>

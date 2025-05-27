@@ -1,0 +1,14 @@
+<div class="fixed bottom-6 right-6 z-50">
+    <button
+      class="group relative w-16 h-16 cursor-pointer bg-green-600 hover:bg-green-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform"
+      title="Create new task"
+      (click)="createTask()"
+    >
+        <!-- Pulsing rings -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r bg-green-600 animate-ping opacity-20"></div>
+        <div class="absolute inset-0 rounded-full bg-gradient-to-r bg-green-600 animate-pulse opacity-30"></div>
+        
+        <!-- Plus icon -->
+        <i class="pi pi-plus text-white text-xl relative z-10 group-hover:rotate-90 transition-transform duration-300"></i>
+    </button>
+</div>

@@ -53,11 +53,6 @@ export class TaskFormComponent {
 
       this.taskService.createTask(taskData).subscribe({
         next: () => {
-          this.messageService.add({
-            severity: "success",
-            summary: "Task Created",
-            detail: "Your task has been created successfully!"
-          })
           this.taskForm.reset()
           this.taskCreated.emit()
           this.isSubmitting = false

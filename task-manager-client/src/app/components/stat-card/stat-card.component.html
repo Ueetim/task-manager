@@ -1,0 +1,41 @@
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-blue-600 text-sm font-medium">Total Tasks</p>
+          <p class="text-3xl mt-3 font-bold text-blue-700">{{ tasks.length }}</p>
+        </div>
+        <i class="pi pi-list-check text-blue-500 text-xl"></i>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-r from-amber-50 to-amber-100 p-4 rounded-lg border border-amber-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-amber-600 text-sm font-medium">Open</p>
+          <p class="text-3xl mt-3 font-bold text-amber-700">{{ getTaskCountByStatus(taskStatus.OPEN) }}</p>
+        </div>
+        <i class="pi pi-clock text-amber-500 text-xl"></i>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border border-orange-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-orange-600 text-sm font-medium">In Progress</p>
+          <p class="text-3xl mt-3 font-bold text-orange-700">{{ getTaskCountByStatus(taskStatus.IN_PROGRESS) }}</p>
+        </div>
+        <i class="pi pi-spin pi-cog text-orange-500 text-xl"></i>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-green-600 text-sm font-medium">Completed</p>
+          <p class="text-3xl mt-3 font-bold text-green-700">{{ getTaskCountByStatus(taskStatus.DONE) }}</p>
+        </div>
+        <i class="pi pi-check-circle text-green-500 text-xl"></i>
+      </div>
+    </div>
+</div>
