@@ -1,0 +1,26 @@
+{
+  "name": "health360-task-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd task-manager-client && npm start",
+    "start:backend": "cd task-manager-api && npm run start:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ueetim/task-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ueetim/task-manager/issues"
+  },
+  "homepage": "https://github.com/Ueetim/task-manager#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
