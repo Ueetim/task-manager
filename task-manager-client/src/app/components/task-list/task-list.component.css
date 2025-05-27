@@ -1,5 +1,6 @@
 ::ng-deep .p-select-label,
 ::ng-deep .p-select-option,
-::ng-deep .p-paginator-current {
+::ng-deep .p-paginator-current,
+::ng-deep .p-confirmdialog-message {
     font-size: 0.9rem !important;
 }
