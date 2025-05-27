@@ -1,0 +1,5 @@
+::ng-deep .p-select-label,
+::ng-deep .p-select-option,
+::ng-deep .p-paginator-current {
+    font-size: 0.9rem !important;
+}

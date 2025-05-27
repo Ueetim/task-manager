@@ -21,6 +21,7 @@
             optionValue="value"
             placeholder="All"
             styleClass="w-40"
+            appendTo="body"
           ></p-dropdown>
         </div>
       </div>
@@ -96,13 +97,12 @@
                 optionValue="value"
                 styleClass="w-full max-w-[140px]"
                 [showClear]="false"
+                appendTo="body"
               ></p-dropdown>
             </td>
             
-            <td class="py-4 px-6 text-center">
-              <div class="flex flex-col items-center space-y-1">
-                <span class="text-sm font-medium text-gray-700">{{ task.createdAt | date }}</span>
-              </div>
+            <td class="py-4 px-6">
+              <span class="text-sm font-medium text-gray-700">{{ task.createdAt | date }}</span>
             </td>
             
             <td class="py-4 px-6 text-center">
@@ -133,11 +133,9 @@
                 </div>
                 <button 
                   *ngIf="selectedStatus !== 'ALL' || searchText"
-                  class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                  class="w-32 h-11 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
                   (click)="clearFilters()"
-                >
-                  Clear Filters
-                </button>
+                >Clear Filters</button>
               </div>
             </td>
           </tr>
@@ -155,3 +153,5 @@
     acceptLabel="Delete"
     rejectLabel="Cancel"
 ></p-confirmDialog>
+
+<p-toast></p-toast>
