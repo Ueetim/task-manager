@@ -104,7 +104,7 @@ Run from the root folder:
 
 ## 🧪 Technologies Used
 
-- Angular 17
+- Angular 19
 - NestJS
 - TypeScript
 - Tailwind CSS
