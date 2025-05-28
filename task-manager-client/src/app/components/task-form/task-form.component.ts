@@ -22,10 +22,10 @@ import { CommonModule } from "@angular/common"
   styleUrls: ["./task-form.component.css"],
 })
 export class TaskFormComponent {
-  @Output() taskCreated = new EventEmitter<void>()
+  @Output() taskCreated = new EventEmitter<void>();
   
-  taskForm: FormGroup
-  isSubmitting = false
+  taskForm: FormGroup;
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,40 +35,40 @@ export class TaskFormComponent {
     this.taskForm = this.fb.group({
       title: ["", Validators.required],
       description: ["", []],
-    })
+    });
   }
 
   f(controlName: string): AbstractControl | null {
-    return this.taskForm.get(controlName)
+    return this.taskForm.get(controlName);
   }
 
   onSubmit(): void {
     if (this.taskForm.valid && !this.isSubmitting) {
-      this.isSubmitting = true
+      this.isSubmitting = true;
       
       const taskData: CreateTaskRequest = {
         title: this.taskForm.value.title.trim(),
         description: this.taskForm.value.description?.trim() || undefined,
-      }
+      };
 
       this.taskService.createTask(taskData).subscribe({
         next: () => {
-          this.taskForm.reset()
-          this.taskCreated.emit()
-          this.isSubmitting = false
+          this.taskForm.reset();
+          this.taskCreated.emit();
+          this.isSubmitting = false;
         },
         error: (error) => {
-          console.error('Task creation error:', error)
+          console.error('Task creation error:', error);
           this.messageService.add({
             severity: "error",
             summary: "Creation Failed",
             detail: "Unable to create task. Please try again."
-          })
-          this.isSubmitting = false
+          });
+          this.isSubmitting = false;
         },
       })
     } else {
-      this.markFormGroupTouched(this.taskForm)
+      this.markFormGroupTouched(this.taskForm);
     }
   }
 
@@ -76,6 +76,6 @@ export class TaskFormComponent {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field)
       control?.markAsTouched({ onlySelf: true })
-    })
+    });
   }
 }

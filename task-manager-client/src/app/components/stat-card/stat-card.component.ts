@@ -12,6 +12,6 @@ export class StatCardComponent {
   @Input() tasks!: Task[];
 
   getTaskCountByStatus(status: TaskStatus): number {
-    return this.tasks.filter(task => task.status === status).length
+    return this.tasks.filter(task => task.status === status).length;
   }
 }

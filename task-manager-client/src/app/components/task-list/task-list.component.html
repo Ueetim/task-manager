@@ -42,9 +42,7 @@
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
         [rowsPerPageOptions]="[5, 10, 20, 50]"
-        styleClass="p-datatable-sm"
         responsiveLayout="scroll"
-        [globalFilterFields]="['title', 'description']"
       >
         <ng-template pTemplate="header">
           <tr class="bg-gray-50">
@@ -79,12 +77,11 @@
             
             <td class="py-4 px-6">
               <div class="max-w-xs">
-                <span *ngIf="task.description; else noDescription" class="text-gray-700 text-sm leading-relaxed">
-                  {{ task.description.length > 100 ? (task.description | slice:0:100) + '...' : task.description }}
-                </span>
-                <ng-template #noDescription>
+                @if (task.description) {
+                  <span [title]="task.description" class="text-gray-700 text-sm leading-relaxed line-clamp-3">{{ task.description }}</span>
+                } @else {
                   <em class="text-gray-400 text-sm">No description provided</em>
-                </ng-template>
+                }
               </div>
             </td>
             
