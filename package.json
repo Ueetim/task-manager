@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install:all": "concurrently \"cd task-manager-client && npm install\" \"cd task-manager-api && npm install\"",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "start:frontend": "cd task-manager-client && npm start",
     "start:backend": "cd task-manager-api && npm run start:dev"

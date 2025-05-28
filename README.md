@@ -40,6 +40,12 @@ cd ../task-manager-api && npm install
 cd ..
 ```
 
+Alternatively, run this from the root to install both:
+
+```bash
+npm run install:all
+```
+
 ### Run both frontend and backend
 
 ```bash
@@ -94,11 +100,12 @@ Located in `task-manager-client/`
 
 Run from the root folder:
 
-| Script              | Description                      |
-|---------------------|----------------------------------|
-| `npm start`         | Run both frontend and backend    |
-| `npm run start:frontend` | Run Angular frontend only     |
-| `npm run start:backend`  | Run NestJS backend only       |
+| Script                   | Description                      |
+|--------------------------|----------------------------------|
+| `npm start`              | Run both frontend and backend    |
+| `npm run start:frontend` | Run Angular frontend only        |
+| `npm run start:backend`  | Run NestJS backend only          |
+| `npm run install:all`    | Install dependencies in both apps|
 
 ---
 
