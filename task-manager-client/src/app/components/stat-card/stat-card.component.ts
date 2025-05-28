@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
-import { Task, TaskStatus } from '../../models/task.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stat-card',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './stat-card.component.html',
   styleUrl: './stat-card.component.css'
 })
 export class StatCardComponent {
-  taskStatus = TaskStatus;
-  @Input() tasks!: Task[];
+  @Input() title!: string;
+  @Input() count!: number;
+  @Input() iconClass!: string;
 
-  getTaskCountByStatus(status: TaskStatus): number {
-    return this.tasks.filter(task => task.status === status).length;
-  }
+  @Input() bgGradient!: string; 
+  @Input() borderColor!: string; 
+  @Input() textColor!: string;   
+  @Input() titleColor!: string;
 }

@@ -1,0 +1,41 @@
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <app-stat-card
+      title="Total Tasks"
+      [count]="tasks.length"
+      iconClass="pi pi-list-check"
+      bgGradient="bg-gradient-to-r from-blue-50 to-blue-100"
+      borderColor="border-blue-200"
+      titleColor="text-blue-600"
+      textColor="text-blue-700"
+    ></app-stat-card>
+  
+    <app-stat-card
+      title="Open"
+      [count]="getTaskCountByStatus(taskStatus.OPEN)"
+      iconClass="pi pi-clock"
+      bgGradient="bg-gradient-to-r from-amber-50 to-amber-100"
+      borderColor="border-amber-200"
+      titleColor="text-amber-600"
+      textColor="text-amber-700"
+    ></app-stat-card>
+  
+    <app-stat-card
+      title="In Progress"
+      [count]="getTaskCountByStatus(taskStatus.IN_PROGRESS)"
+      iconClass="pi pi-spin pi-cog"
+      bgGradient="bg-gradient-to-r from-orange-50 to-orange-100"
+      borderColor="border-orange-200"
+      titleColor="text-orange-600"
+      textColor="text-orange-700"
+    ></app-stat-card>
+  
+    <app-stat-card
+      title="Completed"
+      [count]="getTaskCountByStatus(taskStatus.DONE)"
+      iconClass="pi pi-check-circle"
+      bgGradient="bg-gradient-to-r from-green-50 to-green-100"
+      borderColor="border-green-200"
+      titleColor="text-green-600"
+      textColor="text-green-700"
+    ></app-stat-card>
+</div>  

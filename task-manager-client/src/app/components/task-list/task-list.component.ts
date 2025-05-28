@@ -8,8 +8,8 @@ import { FormsModule } from "@angular/forms";
 import { TableModule } from "primeng/table";
 import { CommonModule } from "@angular/common";
 import { ButtonModule } from "primeng/button";
-import { StatCardComponent } from "../stat-card/stat-card.component";
 import { ToastModule } from "primeng/toast";
+import { StatsAreaComponent } from "../stats-area/stats-area.component";
 
 interface StatusOption {
   label: string
@@ -24,9 +24,9 @@ interface StatusOption {
     TableModule,
     CommonModule,
     ButtonModule,
-    StatCardComponent,
-    ToastModule
-  ],
+    ToastModule,
+    StatsAreaComponent
+],
   providers: [
     MessageService,
     ConfirmationService
